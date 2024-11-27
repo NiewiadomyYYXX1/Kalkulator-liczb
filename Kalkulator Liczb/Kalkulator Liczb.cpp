@@ -119,7 +119,7 @@ int main() {
     welcome(choice, input);
 
     if (choice != 1 && choice != 2 && choice != 3 && choice != 4) {
-        cout << "Blad: Wybrano zly system liczbowy. \n" << endl;
+        cout << "Blad: Wybrano zly system liczbowy. Podaj " << endl;
         main();
     }
 
@@ -129,7 +129,7 @@ int main() {
         isValid = true;
 
         for (char ch : input) {
-            if (choice == 1 && (ch != '0' || ch > '9')) {
+            if (choice == 1 && (ch < '0' || ch > '9')) {
                 isValid = false;
                 break;
             }
@@ -137,7 +137,7 @@ int main() {
                 isValid = false;
                 break;
             }
-            else if (choice == 3 && (ch < '0' && ch > '7')) {
+            else if (choice == 3 && (ch < '0' || ch > '7')) {
                 isValid = false;
                 break;
             }

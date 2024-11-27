@@ -1,0 +1,7 @@
+﻿  Kalkulator Liczb.cpp
+E:\konkurs\Kalkulator Liczb\Kalkulator Liczb\Kalkulator Liczb.cpp(31,16): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+  Trwa generowanie kodu
+  Previous IPDB not found, fall back to full compilation.
+  All 276 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Zakończono generowanie kodu
+  Kalkulator Liczb.vcxproj -> E:\konkurs\Kalkulator Liczb\x64\Release\Kalkulator Liczb.exe
