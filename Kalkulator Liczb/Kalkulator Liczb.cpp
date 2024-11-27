@@ -4,31 +4,97 @@
 #include <algorithm> 
 using namespace std;
 
-void welcome(int& choice, int& input);
-void printCalc(int& choice, int& input);
+void welcome(int& choice, string& input); //deklaracje funkcji poczatkowych
+void printCalc(int& choice, string& input);
 
-vector<int> convert_binary(int input) {
+bool checkIsPalindrome(string input) { //sprawdzanie czy same palidromem
+
+    string firstInput = input;
+    string lastInput = input;
+
+    reverse(lastInput.begin(), lastInput.end());
+
+    if (firstInput == lastInput) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+vector<string> convert_binary(string preinput) { 
+
+    long long input = stoll(preinput); //konwert na zmienna liczbowa long long bo ma byc 12 cyfr
+
     if (input <= 0) { 
-        return { 0 }; 
+        return { "0" };
     }
 
-    vector<int> binary;
+    vector<string> binary;
 
-    while (input > 0) {
-        binary.push_back(input % 2); 
-        input /= 2;                 
+    while (input > 0) { // gdy jest wieksza od zera dodaje do arraya modulo z 2
+        binary.push_back(to_string(input % 2)); 
+        input /= 2;   // input przez 2 aby przygotowac do kolejne petli              
     }
 
-    reverse(binary.begin(), binary.end());
+    reverse(binary.begin(), binary.end()); //odwraca aby byla poprawna kolejnosc
 
     return binary;
+}
+
+vector<string> convert_eight(string preinput) {
+
+    long long input = stoll(preinput);
+
+    if (input <= 0) {
+        return { "0" };
+    }
+
+    vector<string> eight;
+
+    while (input > 0) {
+        eight.push_back(to_string(input % 8));
+        input /= 8;
+    }
+
+    reverse(eight.begin(), eight.end());
+
+    return eight;
+}
+
+vector<string> convert_sixteen(string preinput) {
+    long long input = stoll(preinput);
+
+    if (input <= 0) {
+        return { "0" };
+    }
+
+    vector<string> sixteen;
+
+    string output;
+
+    while(input > 0){
+        int num = input % 16;
+        if (num < 10) {
+            sixteen.push_back(to_string(num));
+        }
+        else {
+            char hex = 'A' + (num - 10);
+            sixteen.push_back(string(1, hex));
+        }
+        input /= 16;
+    }
+
+    reverse(sixteen.begin(), sixteen.end());
+
+    return sixteen;
 }
 
 int main() {
     cout << "\n\n";
 
     int choice;
-    int input;
+    string input;
 
     welcome(choice, input);
 
@@ -45,17 +111,19 @@ int main() {
     return 0;
 }
 
-void printCalc(int& choice, int& input) {
-    int ten = 0;
-    vector<int> binary;
-    int eight = 0;
-    string sixteen = "0";
-    bool isPalindrome = false;
+void printCalc(int& choice, string& input) {
+    string ten = "0";
+    vector<string> binary;
+    vector<string> eight;
+    vector<string> sixteen;
+    bool isPalindrome = checkIsPalindrome(input);
 
     switch (choice) {
         case 1: {
             ten = input;
             binary = convert_binary(input);
+            eight = convert_eight(input);
+            sixteen = convert_sixteen(input);
             break;
         }
         case 2: {
@@ -63,11 +131,11 @@ void printCalc(int& choice, int& input) {
             break;
         }
         case 3: {
-            eight = input;
+            eight.push_back(input);
             break;
         }
         case 4: {
-            sixteen = input;
+            sixteen.push_back(input);
             break;
         }
         default:
@@ -82,9 +150,13 @@ void printCalc(int& choice, int& input) {
         cout << binary[i];
     }
     cout << "\n\n    Osemkowy: ";
-    cout << eight;
+    for (int i = 0; i < eight.size(); ++i) {
+        cout << eight[i];
+    }
     cout << "\n\n    Szestnastkowy: ";
-    cout << sixteen;
+    for (int i = 0; i < sixteen.size(); ++i) {
+        cout << sixteen[i];
+    }
     cout << "\n\n    Czy jest palindromem: " << (isPalindrome ? "Tak": "Nie");
     cout << "\n" << "\n###################################### \n\n\n";
 
@@ -92,7 +164,7 @@ void printCalc(int& choice, int& input) {
     main();
 }
 
-void welcome(int& choice, int& input) {
+void welcome(int& choice, string& input) {
     cout << "###################################### \n"
         << "Wybierz system liczbowy do zamiany: \n"
         << "    1 -> Dziesietny\n"
