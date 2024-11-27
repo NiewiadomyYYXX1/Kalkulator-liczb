@@ -23,7 +23,22 @@ bool checkIsPalindrome(string input) {
     }
 }
 
-vector<string> convert_ten(string input) {
+vector<string> convert_ten_from_eight(string input) {
+    long long output = 0;
+    int power = 1;
+
+    for (int i = input.size() - 1; i >= 0; i--) {
+        output += (input[i] - '0') * power;
+        power *= 8;
+    }
+
+    vector<string> ten;
+    ten.push_back(to_string(output));
+
+    return ten;
+}
+
+vector<string> convert_ten_from_binary(string input) {
 
     long long output = 0;
     int power = 1;
@@ -176,14 +191,17 @@ void printCalc(int& choice, string& input) {
             break;
         }
         case 2: {
-            ten = convert_ten(input);
+            ten = convert_ten_from_binary(input);
             binary.push_back(input);
             eight = convert_eight(joinVectorToString(ten));
             sixteen = convert_sixteen(joinVectorToString(ten));
             break;
         }
         case 3: {
+            ten = convert_ten_from_eight(input);
+            binary = convert_binary(joinVectorToString(ten));
             eight.push_back(input);
+            sixteen = convert_binary(joinVectorToString(ten));
             break;
         }
         case 4: {
