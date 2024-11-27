@@ -1,3 +1,9 @@
+#error one
+*.db
+*.opendb
+*.ipch
+*.vsidx
+
 # Prerequisites
 *.d
 

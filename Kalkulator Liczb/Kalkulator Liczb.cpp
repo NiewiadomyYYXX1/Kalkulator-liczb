@@ -6,6 +6,7 @@ using namespace std;
 
 void welcome(int& choice, string& input); //deklaracje funkcji poczatkowych
 void printCalc(int& choice, string& input);
+string joinVectorToString(vector<string>& vector);
 
 bool checkIsPalindrome(string input) { //sprawdzanie czy same palidromem
 
@@ -148,6 +149,8 @@ void printCalc(int& choice, string& input) {
         case 2: {
             ten = convert_ten(input);
             binary.push_back(input);
+            eight = convert_eight(joinVectorToString(ten));
+            sixteen = convert_sixteen(joinVectorToString(ten));
             break;
         }
         case 3: {
@@ -199,4 +202,14 @@ void welcome(int& choice, string& input) {
     cout << "Podaj liczbe: ";
     cin >> input;
     cout << "###################################### \n" << endl;
+}
+
+string joinVectorToString(vector<string>& vector) {
+    string result;
+
+    for (int i = 0; i < vector.size(); i++) {
+        result += vector[i];
+    }
+
+    return result;
 }
