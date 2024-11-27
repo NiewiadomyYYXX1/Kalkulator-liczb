@@ -1,2 +1,3 @@
 ﻿  Kalkulator Liczb.cpp
+E:\konkurs\Kalkulator Liczb\Kalkulator Liczb\Kalkulator Liczb.cpp(30,16): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
   Kalkulator Liczb.vcxproj -> E:\konkurs\Kalkulator Liczb\x64\Debug\Kalkulator Liczb.exe

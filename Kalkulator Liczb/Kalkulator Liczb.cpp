@@ -22,6 +22,25 @@ bool checkIsPalindrome(string input) { //sprawdzanie czy same palidromem
     }
 }
 
+vector<string> convert_ten(string input) {
+
+    long long output = 0;
+    int power = 1;
+
+    for (int i = input.size() - 1; i >= 0; i--) {
+        if (input[i] == '1') {
+            output += power;
+        }
+        power *= 2;
+    }
+
+    vector<string> ten;
+    ten.push_back(to_string(output));
+
+    return ten;
+
+}
+
 vector<string> convert_binary(string preinput) { 
 
     long long input = stoll(preinput); //konwert na zmienna liczbowa long long bo ma byc 12 cyfr
@@ -112,7 +131,7 @@ int main() {
 }
 
 void printCalc(int& choice, string& input) {
-    string ten = "0";
+    vector<string> ten;
     vector<string> binary;
     vector<string> eight;
     vector<string> sixteen;
@@ -120,13 +139,14 @@ void printCalc(int& choice, string& input) {
 
     switch (choice) {
         case 1: {
-            ten = input;
+            ten.push_back(input);
             binary = convert_binary(input);
             eight = convert_eight(input);
             sixteen = convert_sixteen(input);
             break;
         }
         case 2: {
+            ten = convert_ten(input);
             binary.push_back(input);
             break;
         }
@@ -144,7 +164,9 @@ void printCalc(int& choice, string& input) {
 
     cout << "###################################### \n";
     cout << "\n    Dziesietny: ";
-    cout << ten;
+    for (int i = 0; i < ten.size(); ++i) {
+        cout << ten[i];
+    }
     cout << "\n\n    Dwojkowy: ";
     for (int i = 0; i < binary.size(); ++i) {
         cout << binary[i];
