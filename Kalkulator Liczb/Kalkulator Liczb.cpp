@@ -4,11 +4,11 @@
 #include <algorithm> 
 using namespace std;
 
-void welcome(int& choice, string& input); //deklaracje funkcji poczatkowych
+void welcome(int& choice, string& input); 
 void printCalc(int& choice, string& input);
 string joinVectorToString(vector<string>& vector);
 
-bool checkIsPalindrome(string input) { //sprawdzanie czy same palidromem
+bool checkIsPalindrome(string input) { 
 
     string firstInput = input;
     string lastInput = input;
@@ -44,7 +44,7 @@ vector<string> convert_ten(string input) {
 
 vector<string> convert_binary(string preinput) { 
 
-    long long input = stoll(preinput); //konwert na zmienna liczbowa long long bo ma byc 12 cyfr
+    long long input = stoll(preinput); 
 
     if (input <= 0) { 
         return { "0" };
@@ -52,12 +52,12 @@ vector<string> convert_binary(string preinput) {
 
     vector<string> binary;
 
-    while (input > 0) { // gdy jest wieksza od zera dodaje do arraya modulo z 2
+    while (input > 0) { 
         binary.push_back(to_string(input % 2)); 
-        input /= 2;   // input przez 2 aby przygotowac do kolejne petli              
+        input /= 2;                
     }
 
-    reverse(binary.begin(), binary.end()); //odwraca aby byla poprawna kolejnosc
+    reverse(binary.begin(), binary.end()); 
 
     return binary;
 }
@@ -121,6 +121,35 @@ int main() {
     if (choice != 1 && choice != 2 && choice != 3 && choice != 4) {
         cout << "Blad: Wybrano zly system liczbowy. \n" << endl;
         main();
+    }
+
+    bool isValid = false;
+
+    while (!isValid) {
+        isValid = true;
+
+        for (char ch : input) {
+            if (choice == 1 && (ch != '0' || ch > '9')) {
+                isValid = false;
+                break;
+            }
+            else if (choice == 2 && (ch != '0' && ch != '1')) {
+                isValid = false;
+                break;
+            }
+            else if (choice == 3 && (ch < '0' && ch > '7')) {
+                isValid = false;
+                break;
+            }
+            else if (choice == 4 && !((ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'F') || (ch >= 'a' && ch <= 'f'))) {
+                isValid = false;
+                break;
+            }
+        }
+        if (!isValid) {
+            cout << "Blad: Liczba nie jest poprawna w wybranym systemie liczbowym.";
+            main();
+        }
     }
 
     cout << endl;
