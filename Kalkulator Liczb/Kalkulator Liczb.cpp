@@ -38,6 +38,37 @@ vector<string> convert_ten_from_eight(string input) {
     return ten;
 }
 
+vector<string> convert_ten_from_sixteen(string input) {
+    long long output = 0;
+    int power = 1;
+
+    for (int i = input.size() - 1; i >= 0; i--) {
+        char ch = input[i];
+        int value;
+
+        if (ch >= '0' && ch <= '9') {
+            value = ch - '0';
+        }
+        else if (ch >= 'A' && ch <= 'F') {
+            value = 10 + (ch - 'A');
+        }
+        else if (ch >= 'a' && ch <= 'f') {
+            value = 10 + (ch - 'a');
+        }
+        else {
+            value = 0;
+        }
+
+        output += value * power;
+        power *= 16;
+    }
+
+    vector<string> ten;
+    ten.push_back(to_string(output));
+
+    return ten;
+}
+
 vector<string> convert_ten_from_binary(string input) {
 
     long long output = 0;
@@ -206,6 +237,9 @@ void printCalc(int& choice, string& input) {
         }
         case 4: {
             sixteen.push_back(input);
+            ten = convert_ten_from_sixteen(input);
+            binary = convert_binary(joinVectorToString(ten));
+            eight = convert_eight(joinVectorToString(ten));
             break;
         }
         default:
