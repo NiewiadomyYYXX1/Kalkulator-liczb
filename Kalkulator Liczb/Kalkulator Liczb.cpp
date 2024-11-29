@@ -211,7 +211,10 @@ void printCalc(int& choice, string& input) {
     vector<string> binary;
     vector<string> eight;
     vector<string> sixteen;
-    bool isPalindrome = checkIsPalindrome(input);
+    bool isPalindromeTen;
+    bool isPalindromeBinary;
+    bool isPalindromeEight;
+    bool isPalindromeSixteen;
 
     switch (choice) {
         case 1: {
@@ -219,6 +222,10 @@ void printCalc(int& choice, string& input) {
             binary = convert_binary(input);
             eight = convert_eight(input);
             sixteen = convert_sixteen(input);
+            isPalindromeTen = checkIsPalindrome(joinVectorToString(ten));
+            isPalindromeBinary = checkIsPalindrome(joinVectorToString(binary));
+            isPalindromeEight = checkIsPalindrome(joinVectorToString(eight));
+            isPalindromeSixteen = checkIsPalindrome(joinVectorToString(sixteen));
             break;
         }
         case 2: {
@@ -226,6 +233,10 @@ void printCalc(int& choice, string& input) {
             binary.push_back(input);
             eight = convert_eight(joinVectorToString(ten));
             sixteen = convert_sixteen(joinVectorToString(ten));
+            isPalindromeTen = checkIsPalindrome(joinVectorToString(ten));
+            isPalindromeBinary = checkIsPalindrome(joinVectorToString(binary));
+            isPalindromeEight = checkIsPalindrome(joinVectorToString(eight));
+            isPalindromeSixteen = checkIsPalindrome(joinVectorToString(sixteen));
             break;
         }
         case 3: {
@@ -233,6 +244,10 @@ void printCalc(int& choice, string& input) {
             binary = convert_binary(joinVectorToString(ten));
             eight.push_back(input);
             sixteen = convert_binary(joinVectorToString(ten));
+            isPalindromeTen = checkIsPalindrome(joinVectorToString(ten));
+            isPalindromeBinary = checkIsPalindrome(joinVectorToString(binary));
+            isPalindromeEight = checkIsPalindrome(joinVectorToString(eight));
+            isPalindromeSixteen = checkIsPalindrome(joinVectorToString(sixteen));
             break;
         }
         case 4: {
@@ -240,6 +255,10 @@ void printCalc(int& choice, string& input) {
             ten = convert_ten_from_sixteen(input);
             binary = convert_binary(joinVectorToString(ten));
             eight = convert_eight(joinVectorToString(ten));
+            isPalindromeTen = checkIsPalindrome(joinVectorToString(ten));
+            isPalindromeBinary = checkIsPalindrome(joinVectorToString(binary));
+            isPalindromeEight = checkIsPalindrome(joinVectorToString(eight));
+            isPalindromeSixteen = checkIsPalindrome(joinVectorToString(sixteen));
             break;
         }
         default:
@@ -251,19 +270,22 @@ void printCalc(int& choice, string& input) {
     for (int i = 0; i < ten.size(); ++i) {
         cout << ten[i];
     }
+    cout << "\n    Czy jest palindromem: " << (isPalindromeTen ? "Tak" : "Nie");
     cout << "\n\n    Dwojkowy: ";
     for (int i = 0; i < binary.size(); ++i) {
         cout << binary[i];
     }
+    cout << "\n    Czy jest palindromem: " << (isPalindromeBinary ? "Tak" : "Nie");
     cout << "\n\n    Osemkowy: ";
     for (int i = 0; i < eight.size(); ++i) {
         cout << eight[i];
     }
+    cout << "\n    Czy jest palindromem: " << (isPalindromeEight ? "Tak" : "Nie");
     cout << "\n\n    Szestnastkowy: ";
     for (int i = 0; i < sixteen.size(); ++i) {
         cout << sixteen[i];
     }
-    cout << "\n\n    Czy jest palindromem: " << (isPalindrome ? "Tak": "Nie");
+    cout << "\n    Czy jest palindromem: " << (isPalindromeSixteen ? "Tak" : "Nie");
     cout << "\n" << "\n###################################### \n\n\n";
 
     system("pause");
